@@ -47,7 +47,7 @@ class Applications extends \yii\db\ActiveRecord
     }
 
     public function getCategories() {
-        $categories = $this->hasMany(Categories::className(), ['app_id' => 'id'])->where(['state'=>1]);
+        $categories = $this->hasMany(Categories::className(), [Categories::tableName().'.app_id' => 'id'])->where(['state'=>1]);
         if(count(Yii::$app->zoo->languages) > 1)
             $categories->andWhere(['lang'=>Yii::$app->zoo->lang]);
         return $categories->orderBy('sort ASC')->inverseOf('app');
